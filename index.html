@@ -24,12 +24,26 @@
         font-size: 0px;
         color: #f0f0f0;
         cursor: pointer;
+        border-radius: 10px;
       }
       .flipped {
         background-color: #c27333;
         font-size: 50px;
         color: #000000;
       }
+
+      @keyframes shake {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        50% { transform: translateX(5px); }
+        75% { transform: translateX(-5px); }
+        100% { transform: translateX(0); }
+      }
+
+      .shake {
+        animation: shake 0.5s ease-in-out;
+      }
+      
     </style>
   </head>
   <body>
@@ -91,10 +105,18 @@
       function unflipCards() {
         lockBoard = true;
 
+        // Add the shake class to both cards
+        firstCard.classList.add("shake");
+        secondCard.classList.add("shake");
+
         setTimeout(() => {
           firstCard.classList.remove("flipped");
           secondCard.classList.remove("flipped");
-
+        
+          // Remove the shake class after the animation completes
+          firstCard.classList.remove("shake");
+          secondCard.classList.remove("shake");
+        
           resetBoard();
         }, 1500);
       }
